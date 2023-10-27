@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style id="stylecss"></style>
+    <style>
+        .line{
+            opacity: 0;
+        }
+        .box{
+            position: relative;
+            overflow: hidden;
+            width: 150px;
+            height: 150px;
+            box-shadow: 0px 0px 5px 0px black;
+        }
+    </style>
+</head>
+<body style="overflow: hidden;">
+    <div class="box"></div>
+</body>
+<script>
+    function lineAnim(color,element,numOfLine, timing){
+
+    var body = document.querySelector(element);
+    
+    for(j=0; j<numOfLine; j++){
+        body.innerHTML+=`<div class="line"></div>`
+    }
+
+    setInterval(createFunc,timing);
+
+    var lines = document.querySelectorAll(".line");
+
+    function createFunc(){
+
+
+            var randNum = Math.floor(10 + Math.random() * 100);
+            var top = Math.floor(0 + Math.random() * 100);
+            var left = Math.floor(-20 + Math.random() * 80);
+            var nchild = Math.floor(1 + Math.random() * 360);
+            var col = Math.floor(1 + Math.random() * color.length);
+            var plusOrMinus = Math.random() < 0.5 ? -1 : 1;
+            plusOrMinus.toString().replace("1","");
+
+            var css = document.querySelector("#stylecss");
+            css.innerHTML+=`.line:nth-child(${nchild}){position: absolute; top: ${top}%; left: ${left}%; width:${randNum}%; border:1px solid ${color[col-1]}; transition:1s; transform:rotate(${plusOrMinus}${nchild}deg); opacity: 1;}`
+    
+    }
+    }
+    lineAnim(["red","green","yellow", "blue","orange","tomato"], ".box", 500,100);
+</script>
+</html>
